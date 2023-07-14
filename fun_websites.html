@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fun Websites</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('A.png');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .navbar a:hover {
+            color: red;
+            transform: scale(1.1);
+        }
+        #clock {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            top: 60px;
+        }
+        #search {
+            margin: 20px 0;
+            padding: 10px;
+            width: 500px;
+            border-radius: 25px;
+            border: 2px solid #333;
+        }
+        .website-lists {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            border: 2px solid white;
+            border-radius: 15px;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            width: 300px;
+            height: 300px;
+            overflow-y: auto;
+            margin: auto;
+        }
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+        a:hover {
+            color: darkblue;
+        }
+        h1, h2 {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Fun Games</a>
+        <a href="fun_websites.html">Fun Websites</a>
+        <a href="credits.html">Credits</a>
+        <p id="clock"></p>
+    </div>
+    <div class="container">
+        <h1>Enter a website to visit</h1>
+        <input id="search" type="text" placeholder="Search for a website..." oninput="filterWebsites()"/>
+        <div class="website-lists">
+            <div>
+                <h2>TOP PICKS 🔥</h2>
+                <ul id="topPicks">
+                    <li><a href="https://www.coolmathgames.com/">Cool Math Games</a></li>
+                    <li><a href="https://explordle.com/">Explordle</a></li>
+                    <li><a href="https://pointerpointer.com/">Pointer Pointer</a></li>
+                    <li><a href="https://findtheinvisiblecow.com/">Find the Invisible Cow</a></li>
+                    <li><a href="https://neal.fun/">Neal Fun</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>All Websites 🌐</h2>
+                <ul id="allWebsites">
+                    <li><a href="https://www.coolmathgames.com/">Cool Math Games</a></li>
+                    <li><a href="https://explordle.com/">Explordle</a></li>
+                    <li><a href="https://pointerpointer.com/">Pointer Pointer</a></li>
+                    <li><a href="https://findtheinvisiblecow.com/">Find the Invisible Cow</a></li>
+                    <li><a href="https://www.mapcrunch.com/">Map Crunch</a></li>
+                    <li><a href="https://paint.toys/">Paint Toys</a></li>
+                    <li><a href="https://sliding.toys/mystic-square/8-puzzle/">8 Puzzle</a></li>
+                    <li><a href="https://hackertyper.com/">Hacker Typer</a></li>
+                    <li><a href="https://papertoilet.com/">Paper Toilet</a></li>
+                    <li><a href="https://zoomquilt.org/">Zoom Quilt</a></li>
+                    <li><a href="https://snake.googlemaps.com/">Snake Game on Google Maps</a></li>
+                    <li><a href="https://neal.fun/">Neal Fun</a></li>
+                    <li><a href="https://patatap.com/">Patatap</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        function filterWebsites() {
+            var input = document.getElementById('search');
+            var filter = input.value.toUpperCase();
+            var uls = document.getElementsByTagName('ul');
+
+            for (var j = 0; j < uls.length; j++) {
+                var ul = uls[j];
+                var li = ul.getElementsByTagName('li');
+
+                for (var i = 0; i < li.length; i++) {
+                    var a = li[i].getElementsByTagName('a')[0];
+                    var txtValue = a.textContent || a.innerText;
+
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        function updateTime() {
+            var now = new Date();
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' };
+            var formattedTime = new Intl.DateTimeFormat(navigator.language, options).format(now);
+            document.getElementById('clock').innerText = formattedTime;
+        }
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fun Games</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('A.png');
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: white;
+        }
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background-color: white;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .navbar a:hover {
+            color: red;
+            transform: scale(1.1);
+        }
+        #clock {
+            position: absolute;
+            top: 50px;
+            right: 20px;
+            color: black;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            top: 60px;
+        }
+        #search {
+            margin: 20px 0;
+            padding: 10px;
+            width: 500px;
+            border-radius: 25px;
+            border: 2px solid #333;
+        }
+        .game-lists {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            border: 2px solid white;
+            border-radius: 15px;
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            width: 300px;
+            height: 300px;
+            overflow-y: auto;
+            margin: auto;
+        }
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+        a:hover {
+            color: darkblue;
+        }
+        h1, h2 {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Fun Games</a>
+        <a href="fun_websites.html">Fun Websites</a>
+        <a href="credits.html">Credits</a>
+        <p id="clock"></p>
+    </div>
+    <div class="container">
+        <h1>Enter a game to play</h1>
+        <input id="search" type="text" placeholder="Search for a game..." oninput="filterGames()"/>
+        <div class="game-lists">
+            <div>
+                <h2>TOP PICKS 🔥</h2>
+                <ul id="topPicks">
+                    <li><a href="https://pacman.live/">Pacman</a></li>
+                    <li><a href="https://tetris.com/play-tetris">Tetris</a></li>
+                    <li><a href="https://www.ponggame.org/">Pong Game</a></li>
+                    <li><a href="https://8ballpool.com/en/game">8 Ball Pool</a></li>
+                    <li><a href="https://www.coolmathgames.com/0-run-3">Run 3</a></li>
+                </ul>
+            </div>
+            <div>
+                <h2>All Games 🎮</h2>
+                <ul id="allGames">
+                    <li><a href="https://pacman.live/">Pacman</a></li>
+                    <li><a href="https://tetris.com/play-tetris">Tetris</a></li>
+                    <li><a href="https://www.ponggame.org/">Pong Game</a></li>
+                    <li><a href="https://8ballpool.com/en/game">8 Ball Pool</a></li>
+                    <li><a href="https://offline-dino-game.firebaseapp.com/">Offline Dino Game</a></li>
+                    <li><a href="https://www.chess.com/home">Chess.com</a></li>
+                    <li><a href="https://minesweeperonline.com/">Minesweeper</a></li>
+                    <li><a href="https://lagged.com/en/g/checkers?fromchanel=20286659510&gclid=Cj0KCQjwnrmlBhDHARIsADJ5b_lB2OFa9BQk84ZVK0RSPU-WJ9h_E50zY5MfE0psh9ZTnyT36Q_XXh4aApgnEALw_wcB">Checkers</a></li>
+                    <li><a href="https://lagged.com/en/g/501-darts?fromchanel=20286659510&gclid=Cj0KCQjwnrmlBhDHARIsADJ5b_loo0ahpHmMO6jXzZCshw5wjrmv8ci1-y-VYZwLSsHj_OMUEsfEr-8aAjz_EALw_wcB">501 Darts</a></li>
+                    <li><a href="https://www.coolmathgames.com/0-run-3">Run 3</a></li>
+                    <li><a href="https://snake.io/">Snake.io</a></li>
+                    <li><a href="https://playsnake.org/">Play Snake</a></li>
+                    <li><a href="https://playtictactoe.org/">Tic Tac Toe</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script>
+        function filterGames() {
+            var input = document.getElementById('search');
+            var filter = input.value.toUpperCase();
+            var uls = document.getElementsByTagName('ul');
+
+            for (var j = 0; j < uls.length; j++) {
+                var ul = uls[j];
+                var li = ul.getElementsByTagName('li');
+
+                for (var i = 0; i < li.length; i++) {
+                    var a = li[i].getElementsByTagName('a')[0];
+                    var txtValue = a.textContent || a.innerText;
+
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        li[i].style.display = "";
+                    } else {
+                        li[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        function updateTime() {
+            var now = new Date();
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' };
+            var formattedTime = new Intl.DateTimeFormat(navigator.language, options).format(now);
+            document.getElementById('clock').innerText = formattedTime;
+        }
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
